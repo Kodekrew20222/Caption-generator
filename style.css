@@ -1,0 +1,174 @@
+body {
+  background: #f8f9fc;
+}
+
+.top-btn{
+    font-size: 13px;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: #D4C4EE;
+    color: #3D1D6E;
+    font-weight: 500;
+}
+
+.start-btn{
+    background-color: #3D1D6E;
+    color: #fff;
+}
+
+.start-btn:hover{
+    background-color: #3D1D6E;
+    color: #fff;
+}
+
+.w-80{
+    width: 80%;
+}
+
+/* PAGE CONTROL */
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+/* CLIENT CARD */
+.client-card {
+  padding: 20px 40px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  transition: 0.3s;
+  box-shadow: #cfcfcf 10px 8px 25px;
+}
+
+.client-card:hover {
+  transform: translateY(-5px);
+}
+
+.client-card.active {
+  border: 2px solid #6B3FA0;
+  background-color: #EDE7F6;
+}
+
+.go-btn{
+    background-color: #3D1D6E;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 40px;
+    font-size: 16px;
+    box-shadow: #b8b7b7 10px 8px 25px;
+}
+.go-btn:hover{
+    background-color: #3D1D6E;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 40px;
+    font-size: 16px;
+    box-shadow: #cfcfcf 10px 8px 25px;
+}
+
+/* UPLOAD BOX */
+.upload-box {
+  border: 2px solid #ced4da;
+  padding: 40px;
+  border-radius: 16px;
+  background: white;
+}
+
+/* CHIPS */
+.chip {
+  background: #e9ecef;
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: #6f42c1;
+  color: white;
+}
+
+/* RESULT CARDS */
+#captions div {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* UPLOAD WRAPPER */
+.upload-wrapper {
+  width: 100%;
+}
+
+/* UPLOAD BOX */
+.upload-box {
+  border-color: #6f42c1;
+  background: #faf7ff;
+  border-radius: 20px;
+  padding: 50px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-box:hover {
+  border-color: #6f42c1;
+  background: #faf7ff;
+}
+
+/* UPLOAD CONTENT */
+.upload-content {
+  text-align: center;
+}
+
+.upload-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+/* PREVIEW */
+.preview-img {
+  max-width: 150px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* TEXTAREA */
+.custom-textarea {
+  width: 100%;
+  height: 12rem;
+  border-radius: 14px;
+  padding: 15px;
+  margin-top: 15px;
+  border: 2px solid #6f42c1;
+  background: #fff;
+}
+
+
+/* BUTTON */
+.generate-btn {
+  background: #111827;
+  color: white;
+  border: none;
+  padding: 15px 50px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.generate-btn:hover {
+  background: #000;
+}
+
+#inputPage{
+    background: #faf7ff;
+}

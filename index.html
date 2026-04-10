@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CampaignAI</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-light bg-white px-4 border-bottom py-0">
+  <span class="navbar-brand fw-bold py-0">
+    <img src="./assets/images/logo.png" alt="" style="height: 5rem;">
+  </span>
+  <span>☰</span>
+</nav>
+
+<!-- ================= PAGE 1 ================= -->
+<section id="homePage" class="page active container-fluid py-5">
+  <div class="row align-items-center mx-5">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <h1 class="fw-bold display-5">
+        Turn your photos <br>
+        into <span>viral stories.</span>
+      </h1>
+
+      <p class="text-muted my-4 w-80">
+        Our AI analyzes your images and generates captions,
+        hashtags and engagement hooks in seconds.
+      </p>
+
+      <div class="mt-3">
+        <span class="badge me-2 top-btn">Attractive Captions</span>
+        <span class="badge me-2 top-btn">Smart Hashtags</span>
+        <span class="badge top-btn">Instant Keywords</span>
+      </div>
+
+      <button class="btn go-btn mt-5 px-4 py-3 w-80 start-btn" onclick="goToClients()">
+        Click to Start 
+      </button>
+    </div>
+
+    <div class="col-md-4 text-end">
+      <img src="./assets/images/social.png" alt="">
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</section>
+
+<!-- ================= PAGE 2 ================= -->
+<section id="clientPage" class="page container py-5 ps-5">
+
+  <h2 class="fw-bold mb-1 text-center">Select Client</h2>
+  <p class="mb-4 text-center">Choose the brand you're creating content for to get started</p>
+    <!-- Hidden Select (used by your JS logic) -->
+  <select id="client" class="d-none">
+    <option value="monkeybar" selected>Monkey Bar</option>
+    <option value="cineport">Cineport</option>
+    <option value="mrapexart">Mrapexart</option>
+    <option value="aayush">Aayush</option>
+  </select>
+  <div class="row g-4 justify-content-center">
+
+    <div class="col-md-5 py-4">
+      <div class="card client-card active" onclick="selectClientUI('monkeybar', this)">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="./assets/images/mb.jpg" alt="" style="height: 6rem; width: 6rem; border-radius: 50%; margin-bottom: 20px;">
+            </div>
+            <div class="col-md-9">
+                <h5>Monkey Bar</h5>
+        <p class="text-muted mb-2">Food & beverage brand.</p>
+        <div class="">
+            <span class="badge me-2 top-btn">Fun</span>
+            <span class="badge me-2 top-btn"> Energetic</span>
+        </div>
+            </div>
+        </div>
+        <p>Vibrant street food brand with  fun, energetic personality. Known fir bold flavours and social first marketing strategies</p>
+      </div>
+    </div>
+
+    <div class="col-md-5 py-4 ms-5">
+      <div class="card client-card" onclick="selectClientUI('cineport', this)">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="./assets/images/cineport.jpg" alt="" style="height: 6rem; width: 6rem; border-radius: 50%; margin-bottom: 20px;">
+            </div>
+            <div class="col-md-9">
+                <h5>Cineport</h5>
+        <p class="text-muted mb-2">Food & beverage brand.</p>
+        <div class="">
+            <span class="badge me-2 top-btn">Fun</span>
+            <span class="badge me-2 top-btn"> Energetic</span>
+        </div>
+            </div>
+        </div>
+        <p>Vibrant street food brand with  fun, energetic personality. Known fir bold flavours and social first marketing strategies</p>
+      </div>
+    </div>
+
+    <div class="col-md-5 py-5 pt-0">
+      <div class="card client-card" onclick="selectClientUI('mrapexart', this)">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="./assets/images/apexart.jpg" alt="" style="height: 6rem; width: 6rem; border-radius: 50%; margin-bottom: 20px;">
+            </div>
+            <div class="col-md-9">
+                <h5>Mr Apexart</h5>
+        <p class="text-muted mb-2">Food & beverage brand.</p>
+        <div class="">
+            <span class="badge me-2 top-btn">Fun</span>
+            <span class="badge me-2 top-btn"> Energetic</span>
+        </div>
+            </div>
+        </div>
+        <p>Vibrant street food brand with  fun, energetic personality. Known fir bold flavours and social first marketing strategies</p>
+      </div>
+    </div>
+
+    <div class="col-md-5 py-5 ms-5 pt-0">
+      <div class="card client-card" onclick="selectClientUI('aayush', this)">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="./assets/images/aayush.jpg" alt="" style="height: 6rem; width: 6rem; border-radius: 50%; margin-bottom: 20px;">
+            </div>
+            <div class="col-md-9">
+                <h5>Aayush</h5>
+        <p class="text-muted mb-2">Food & beverage brand.</p>
+        <div class="">
+            <span class="badge me-2 top-btn">Fun</span>
+            <span class="badge me-2 top-btn"> Energetic</span>
+        </div>
+            </div>
+        </div>
+        <p>Vibrant street food brand with  fun, energetic personality. Known fir bold flavours and social first marketing strategies</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="text-center">
+    <button class="btn go-btn px-5" onclick="goToInput()">
+    Continue to Upload Creative
+  </button>
+  </div>
+
+</section>
+
+<!-- ================= PAGE 3 ================= -->
+<section id="inputPage" class="page container py-5">
+
+  <h3 class="fw-bold mb-2">Upload Creative</h3>
+  <p>Provide the visual asset for the campaign</p>
+
+  <!-- CUSTOM UPLOAD BOX -->
+  <div class="upload-wrapper mx-auto">
+
+  <label for="imageUpload" class="upload-box d-block">
+
+    <div class="row align-items-center">
+
+      <!-- LEFT: UPLOAD CONTENT -->
+      <div class="col-md-6 text-center border-end upload-left">
+        <div class="upload-content">
+          <div class="upload-icon mb-2">
+            <img src="./assets/images/drop.png" alt="" class="img-fluid" style="max-width:60px;">
+          </div>
+          <p class="mb-1 fw-semibold">Click To Upload Your Creative</p>
+          <small class="text-muted">PNG, JPG supported</small>
+        </div>
+      </div>
+
+      <!-- RIGHT: PREVIEW -->
+      <div class="col-md-6 text-center upload-right">
+        <img id="previewImage" class="img-fluid preview-img d-none" />
+        <p class="text-muted preview-placeholder mb-0">Preview will appear here</p>
+      </div>
+
+    </div>
+
+    <!-- HIDDEN INPUT -->
+    <input type="file" id="imageUpload" hidden>
+
+  </label>
+
+</div>
+
+  <!-- PREVIEW -->
+  <div class="mt-4">
+    <img id="previewImage" class="img-fluid preview-img d-none" />
+  </div>
+
+  <!-- TONE -->
+  <h4 class="fw-bold mt-5">Description</h4>
+
+  <textarea
+    id="toneInput"
+    class="form-control custom-textarea mx-auto"
+    placeholder="Describe tone..."
+  ></textarea>
+
+  <!-- BUTTON -->
+   <div class="text-end">
+    <button class="generate-btn mt-4" onclick="generateResultWrapper()">
+    Generate Result
+  </button>
+   </div>
+
+</section>
+
+<!-- ================= PAGE 4 ================= -->
+<section id="resultPage" class="page container py-5">
+
+  <h2 class="fw-bold">Here's your caption 🎉</h2>
+
+  <div class="row mt-4">
+
+    <div class="col-md-4">
+      <img id="previewImage" class="img-fluid rounded shadow" />
+    </div>
+
+    <div class="col-md-8">
+
+      <div id="captions"></div>
+
+      <h5 class="mt-4">Hashtags</h5>
+      <div id="hashtags"></div>
+
+      <h5 class="mt-4">Keywords</h5>
+      <div id="keywords"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+<script>
+    function selectClientUI(clientKey, el) {
+
+  // 👉 Update hidden select (THIS is what your logic uses)
+  document.getElementById("client").value = clientKey;
+
+  // 👉 UI active state
+  document.querySelectorAll(".client-card").forEach(card => {
+    card.classList.remove("active");
+  });
+
+  el.classList.add("active");
+}
+</script>
+</body>
+</html>
