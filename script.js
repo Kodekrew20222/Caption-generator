@@ -745,15 +745,7 @@ function copyText(text) {
 function renderOutput(text) {
   const output = document.getElementById("output");
 
-  if (!output) {
-    console.error("Output element not found");
-    return;
-  }
-
-  output.innerHTML = "";
-
   const captionRegex = /CAPTION_\d:\s*([\s\S]*?)(?=CAPTION_\d:|HASHTAGS:)/g;
-
   let captions = [];
   let match;
 
@@ -767,29 +759,38 @@ function renderOutput(text) {
   const keywordMatch = text.match(/KEYWORDS:\s*(.*)/);
   let keywords = keywordMatch ? keywordMatch[1].split(",").map(k => k.trim()) : [];
 
+  output.innerHTML = `
+    <h3 class="result-title">Here's your caption! 🎉</h3>
+    <p class="result-sub">Based on your selected tone.</p>
+  `;
+
   captions.forEach((caption) => {
     output.innerHTML += `
-      <div class="caption-card">
+      <div class="result-card">
         <p>${caption}</p>
-        <button onclick="copyText(\`${caption}\`)">Copy Caption</button>
+        <button class="copy-btn" onclick="copyText(\`${caption}\`)">
+          Copy Text
+        </button>
       </div>
     `;
   });
 
+  // HASHTAGS
   output.innerHTML += `
-    <div class="hashtag-section">
-      <h5>Hashtags</h5>
-      <div class="hashtag-list">
-        ${hashtags.map(tag => `<span class="hashtag">${tag}</span>`).join("")}
+    <div class="result-section">
+      <h6 class="section-title">SUGGESTED HASHTAGS</h6>
+      <div class="tag-container">
+        ${hashtags.map(tag => `<span class="tag">${tag}</span>`).join("")}
       </div>
     </div>
   `;
 
+  // KEYWORDS
   output.innerHTML += `
-    <div class="hashtag-section">
-      <h5>Keywords</h5>
-      <div class="hashtag-list">
-        ${keywords.map(k => `<span class="hashtag">${k}</span>`).join("")}
+    <div class="result-section">
+      <h6 class="section-title">SUGGESTED KEYWORDS</h6>
+      <div class="tag-container">
+        ${keywords.map(k => `<span class="tag">${k}</span>`).join("")}
       </div>
     </div>
   `;

@@ -172,3 +172,85 @@ body {
 #inputPage{
     background: #faf7ff;
 }
+
+/* RESULT PAGE */
+
+.result-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.result-sub {
+  color: #6b7280;
+  margin-bottom: 25px;
+}
+
+/* CAPTION CARD */
+
+.result-card {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.result-card p {
+  margin-bottom: 15px;
+  font-size: 15px;
+  color: #111827;
+}
+
+/* COPY BUTTON */
+
+.copy-btn {
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  border: none;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.copy-btn:hover {
+  opacity: 0.9;
+}
+
+/* SECTIONS */
+
+.result-section {
+  margin-top: 25px;
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+/* TAGS */
+
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  background: #eef2ff;
+  color: #6366f1;
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tag:hover {
+  background: #6366f1;
+  color: white;
+}
