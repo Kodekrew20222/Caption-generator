@@ -796,13 +796,6 @@ function renderOutput(text) {
   `;
 }
 
-console.log({
-  client: selectedClient,
-  tone: clientData.tone,
-  audience: clientData.audience,
-  description: description,
-  prompt: prompt
-});
 
 /* ================================
    GENERATE CAPTION
@@ -901,6 +894,14 @@ HASHTAGS:
 KEYWORDS:
 keyword1, keyword2 ...
 `;
+
+console.log({
+  client: selectedClient,
+  tone: clientData.tone,
+  audience: clientData.audience,
+  description: description,
+  prompt: prompt
+});
 
     const response = await fetch("/.netlify/functions/generate", {
       method: "POST",
