@@ -803,12 +803,16 @@ function renderOutput(text) {
 
 async function generateCaption() {
 
+  console.log("🚀 generateCaption triggered");
+
   const descEl = document.getElementById("description");
   const fileInput = document.getElementById("imageUpload");
   const output = document.getElementById("output");
 
+  console.log("🔍 DOM Elements:", { descEl, fileInput, output });
+
   if (!descEl || !fileInput || !output) {
-    console.error("Required elements missing");
+    console.error("❌ Required elements missing");
     alert("Something is wrong with the page. Check IDs.");
     return;
   }
@@ -816,42 +820,35 @@ async function generateCaption() {
   const description = descEl.value;
   const file = fileInput.files[0];
 
+  console.log("📝 Description:", description);
+  console.log("🖼 File:", file);
+
   if (!file) {
     alert("Please upload an image");
+    console.warn("⚠️ No image uploaded");
     return;
   }
 
+  console.log("🎯 Selected Client:", selectedClient);
+
   const clientData = clients[selectedClient];
 
+  console.log("📦 Client Data:", clientData);
+
   if (!clientData) {
+    console.error("❌ clientData undefined");
     alert("Client not selected properly");
     return;
   }
 
-  output.innerHTML = `
-  <div class="loading-wrapper">
-    
-    <h5 class="loading-title">
-      Generating Captions
-      <span class="dots">
-        <span></span><span></span><span></span><span></span>
-      </span>
-    </h5>
-
-    ${[1,2,3].map(() => `
-      <div class="skeleton-card">
-        <div class="skeleton-line w-100"></div>
-        <div class="skeleton-line w-75"></div>
-        <div class="skeleton-line w-50"></div>
-        <div class="skeleton-btn"></div>
-      </div>
-    `).join("")}
-
-  </div>
-`;
+  output.innerHTML = "<div class='text-center p-4'>Loading...</div>";
 
   try {
+    console.log("🔄 Converting image to base64...");
     const base64Image = await convertImage(file);
+
+    console.log("✅ Image converted (base64 length):", base64Image.length);
+
     const examples = clientData.examples.join("\n");
     const hashtags = clientData.hashtags.join(" ");
 
@@ -895,13 +892,9 @@ KEYWORDS:
 keyword1, keyword2 ...
 `;
 
-console.log({
-  client: selectedClient,
-  tone: clientData.tone,
-  audience: clientData.audience,
-  description: description,
-  prompt: prompt
-});
+    console.log("🧠 FINAL PROMPT:\n", prompt);
+
+    console.log("📡 Sending request to API...");
 
     const response = await fetch("/.netlify/functions/generate", {
       method: "POST",
@@ -923,17 +916,31 @@ console.log({
       })
     });
 
+    console.log("📥 Response Status:", response.status);
+
     const data = await response.json();
+
+    console.log("📦 FULL API RESPONSE:", data);
+
+    if (data.error) {
+      console.error("❌ API Error:", data.error);
+      output.innerHTML = `<div class='text-danger'>${data.error.message}</div>`;
+      return;
+    }
 
     if (data.candidates && data.candidates.length > 0) {
       const result = data.candidates[0].content.parts[0].text;
+
+      console.log("✅ AI RESULT:", result);
+
       renderOutput(result);
     } else {
+      console.warn("⚠️ No candidates returned");
       output.innerHTML = "<div class='text-danger'>No captions returned</div>";
     }
 
   } catch (error) {
-    console.error(error);
+    console.error("🔥 FETCH ERROR:", error);
     output.innerHTML = "<div class='text-danger'>API request failed</div>";
   }
 }
