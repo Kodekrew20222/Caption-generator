@@ -291,7 +291,7 @@ const clients = {
   mrapexart: {
     tone: "Sophisticated, Philosophical, & Bold",
 
-    audience: "Luxury Collectors & Modern Creatives",
+    audience: "Minimal Life. Meaningful Content.",
 
     examples: [
       "Pagani, Prada & pandemonium By Mr Apex\n\n A living room turned luxury theatre where the panda poses in Prada, the ostrich strikes a model’s stance, and the Pagani gleams like it’s been blessed by the algorithm. Each object plays a role in this staged ecosystem of taste. Nothing is random. Everything is branded. \n\nThe composition draws from both pop surrealism and influencer maximalism. Warhol’s echo appears through the Campbell’s poster, but the quote above it “Live your best life” feels more like a status update than spiritual advice. The green chandelier, the untouched champagne, the curated clash of textures all conspire to say this: this is how icons decorate. Even the animals look camera-ready. Because in the gospel of curated living, aesthetic isn’t just everything it’s the only thing. \n\n80 × 47 Inches | Acrylic on Canvas \n\nNow available at @thedesignera \n\n#LuxuryCulture #PopLuxury #designeragallery #popart",
