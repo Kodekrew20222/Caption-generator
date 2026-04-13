@@ -803,13 +803,17 @@ function renderOutput(text) {
 
 async function generateCaption() {
 
-  console.log("🚀 generateCaption triggered");
+  console.log("🚀 generateCaption STARTED");
 
   const descEl = document.getElementById("description");
   const fileInput = document.getElementById("imageUpload");
   const output = document.getElementById("output");
 
-  console.log("🔍 DOM Elements:", { descEl, fileInput, output });
+  console.log("🔍 DOM CHECK:", {
+    descriptionElement: descEl,
+    fileInputElement: fileInput,
+    outputElement: output
+  });
 
   if (!descEl || !fileInput || !output) {
     console.error("❌ Required elements missing");
@@ -821,11 +825,11 @@ async function generateCaption() {
   const file = fileInput.files[0];
 
   console.log("📝 Description:", description);
-  console.log("🖼 File:", file);
+  console.log("🖼 Uploaded File:", file);
 
   if (!file) {
-    alert("Please upload an image");
     console.warn("⚠️ No image uploaded");
+    alert("Please upload an image");
     return;
   }
 
@@ -836,21 +840,46 @@ async function generateCaption() {
   console.log("📦 Client Data:", clientData);
 
   if (!clientData) {
-    console.error("❌ clientData undefined");
+    console.error("❌ clientData not found for:", selectedClient);
     alert("Client not selected properly");
     return;
   }
 
-  output.innerHTML = "<div class='text-center p-4'>Loading...</div>";
+  // ✅ KEEP YOUR SKELETON LOADER (UNCHANGED)
+  output.innerHTML = `
+  <div class="loading-wrapper">
+    
+    <h5 class="loading-title">
+      Generating Captions
+      <span class="dots">
+        <span></span><span></span><span></span><span></span>
+      </span>
+    </h5>
+
+    ${[1,2,3].map(() => `
+      <div class="skeleton-card">
+        <div class="skeleton-line w-100"></div>
+        <div class="skeleton-line w-75"></div>
+        <div class="skeleton-line w-50"></div>
+        <div class="skeleton-btn"></div>
+      </div>
+    `).join("")}
+
+  </div>
+`;
 
   try {
     console.log("🔄 Converting image to base64...");
+
     const base64Image = await convertImage(file);
 
-    console.log("✅ Image converted (base64 length):", base64Image.length);
+    console.log("✅ Base64 conversion done. Length:", base64Image.length);
 
     const examples = clientData.examples.join("\n");
     const hashtags = clientData.hashtags.join(" ");
+
+    console.log("📚 Examples:", examples);
+    console.log("#️⃣ Hashtags:", hashtags);
 
     const prompt = `
 You are a professional Instagram copywriter.
@@ -923,7 +952,7 @@ keyword1, keyword2 ...
     console.log("📦 FULL API RESPONSE:", data);
 
     if (data.error) {
-      console.error("❌ API Error:", data.error);
+      console.error("❌ API ERROR:", data.error);
       output.innerHTML = `<div class='text-danger'>${data.error.message}</div>`;
       return;
     }
@@ -943,6 +972,8 @@ keyword1, keyword2 ...
     console.error("🔥 FETCH ERROR:", error);
     output.innerHTML = "<div class='text-danger'>API request failed</div>";
   }
+
+  console.log("🏁 generateCaption FINISHED");
 }
 
 
