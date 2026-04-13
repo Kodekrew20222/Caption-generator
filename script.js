@@ -796,6 +796,13 @@ function renderOutput(text) {
   `;
 }
 
+console.log({
+  client: selectedClient,
+  tone: clientData.tone,
+  audience: clientData.audience,
+  description: description,
+  prompt: prompt
+});
 
 /* ================================
    GENERATE CAPTION
@@ -828,7 +835,27 @@ async function generateCaption() {
     return;
   }
 
-  output.innerHTML = "<div class='text-center p-4'>Generating captions...</div>";
+  output.innerHTML = `
+  <div class="loading-wrapper">
+    
+    <h5 class="loading-title">
+      Generating Captions
+      <span class="dots">
+        <span></span><span></span><span></span><span></span>
+      </span>
+    </h5>
+
+    ${[1,2,3].map(() => `
+      <div class="skeleton-card">
+        <div class="skeleton-line w-100"></div>
+        <div class="skeleton-line w-75"></div>
+        <div class="skeleton-line w-50"></div>
+        <div class="skeleton-btn"></div>
+      </div>
+    `).join("")}
+
+  </div>
+`;
 
   try {
     const base64Image = await convertImage(file);
