@@ -671,30 +671,40 @@ const clients = {
    GLOBAL STATE
 ================================ */
 
-let selectedClient = "monkeybar"; // default
+let selectedClient = "monkeybar";
 
 
 /* ================================
-   IMAGE PREVIEW
+   SAFE DOM LOAD
 ================================ */
 
-document.getElementById("imageUpload").addEventListener("change", function () {
-  const file = this.files[0];
-  if (!file) return;
+document.addEventListener("DOMContentLoaded", () => {
 
-  const reader = new FileReader();
+  const imageInput = document.getElementById("imageUpload");
 
-  reader.onload = function (e) {
-    const img = document.getElementById("previewImage");
-    const placeholder = document.querySelector(".preview-placeholder");
+  if (imageInput) {
+    imageInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (!file) return;
 
-    img.src = e.target.result;
-    img.classList.remove("d-none");
+      const reader = new FileReader();
 
-    if (placeholder) placeholder.style.display = "none";
-  };
+      reader.onload = function (e) {
+        const img = document.getElementById("previewImage");
+        const placeholder = document.querySelector(".preview-placeholder");
 
-  reader.readAsDataURL(file);
+        if (img) {
+          img.src = e.target.result;
+          img.classList.remove("d-none");
+        }
+
+        if (placeholder) placeholder.style.display = "none";
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
 });
 
 
@@ -734,6 +744,12 @@ function copyText(text) {
 
 function renderOutput(text) {
   const output = document.getElementById("output");
+
+  if (!output) {
+    console.error("Output element not found");
+    return;
+  }
+
   output.innerHTML = "";
 
   const captionRegex = /CAPTION_\d:\s*([\s\S]*?)(?=CAPTION_\d:|HASHTAGS:)/g;
@@ -781,26 +797,44 @@ function renderOutput(text) {
 
 
 /* ================================
-   GENERATE CAPTION (UNCHANGED LOGIC)
+   GENERATE CAPTION
 ================================ */
 
 async function generateCaption() {
 
-  const description = document.getElementById("description").value;
-  const file = document.getElementById("imageUpload").files[0];
+  const descEl = document.getElementById("description");
+  const fileInput = document.getElementById("imageUpload");
+  const output = document.getElementById("output");
+
+  if (!descEl || !fileInput || !output) {
+    console.error("Required elements missing");
+    alert("Something is wrong with the page. Check IDs.");
+    return;
+  }
+
+  const description = descEl.value;
+  const file = fileInput.files[0];
 
   if (!file) {
     alert("Please upload an image");
     return;
   }
 
-  const clientData = clients[selectedClient]; // ✅ FIXED
+  const clientData = clients[selectedClient];
 
-  const base64Image = await convertImage(file);
-  const examples = clientData.examples.join("\n");
-  const hashtags = clientData.hashtags.join(" ");
+  if (!clientData) {
+    alert("Client not selected properly");
+    return;
+  }
 
-  const prompt = `
+  output.innerHTML = "<div class='text-center p-4'>Generating captions...</div>";
+
+  try {
+    const base64Image = await convertImage(file);
+    const examples = clientData.examples.join("\n");
+    const hashtags = clientData.hashtags.join(" ");
+
+    const prompt = `
 You are a professional Instagram copywriter.
 
 Brand Tone: ${clientData.tone}
@@ -840,13 +874,11 @@ KEYWORDS:
 keyword1, keyword2 ...
 `;
 
-  document.getElementById("output").innerHTML =
-    "<div class='text-center p-4'>Generating captions...</div>";
-
-  try {
     const response = await fetch("/.netlify/functions/generate", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         contents: [{
           parts: [
@@ -868,14 +900,12 @@ keyword1, keyword2 ...
       const result = data.candidates[0].content.parts[0].text;
       renderOutput(result);
     } else {
-      document.getElementById("output").innerHTML =
-        "<div class='text-danger'>No captions returned</div>";
+      output.innerHTML = "<div class='text-danger'>No captions returned</div>";
     }
 
   } catch (error) {
     console.error(error);
-    document.getElementById("output").innerHTML =
-      "<div class='text-danger'>API request failed</div>";
+    output.innerHTML = "<div class='text-danger'>API request failed</div>";
   }
 }
 
@@ -888,7 +918,9 @@ function showPage(pageId) {
   document.querySelectorAll(".page").forEach(page => {
     page.classList.remove("active");
   });
-  document.getElementById(pageId).classList.add("active");
+
+  const target = document.getElementById(pageId);
+  if (target) target.classList.add("active");
 }
 
 function goToClients() {
@@ -911,15 +943,15 @@ function selectClient(key, el) {
     card.classList.remove("active");
   });
 
-  el.classList.add("active");
+  if (el) el.classList.add("active");
 }
 
 
 /* ================================
-   WRAPPER (FIXED)
+   WRAPPER
 ================================ */
 
 async function generateResultWrapper() {
-  await generateCaption(); // ✅ FIXED
-  showPage("resultPage");
+  showPage("resultPage");   // ✅ important fix
+  await generateCaption();  // run after page visible
 }
