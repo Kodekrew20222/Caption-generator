@@ -67,6 +67,7 @@
     <option value="mrapexart">Mrapexart</option>
     <option value="aayush">Aayush</option>
   </select>
+
   <div class="row g-4 justify-content-center">
 
     <div class="col-md-5 py-4">
@@ -194,11 +195,6 @@
 
 </div>
 
-  <!-- PREVIEW -->
-  <div class="mt-4">
-    <img id="previewImage" class="img-fluid preview-img d-none" />
-  </div>
-
   <!-- TONE -->
   <h4 class="fw-bold mt-5">Description</h4>
 
@@ -220,24 +216,16 @@
 <!-- ================= PAGE 4 ================= -->
 <section id="resultPage" class="page container py-5">
 
-  <h2 class="fw-bold">Here's your caption 🎉</h2>
+  <h2 class="fw-bold">Your Results 🎉</h2>
 
   <div class="row mt-4">
 
     <div class="col-md-4">
-      <img id="previewImage" class="img-fluid rounded shadow" />
+      <img id="resultPreview" class="img-fluid rounded shadow"/>
     </div>
 
     <div class="col-md-8">
-
-      <div id="captions"></div>
-
-      <h5 class="mt-4">Hashtags</h5>
-      <div id="hashtags"></div>
-
-      <h5 class="mt-4">Keywords</h5>
-      <div id="keywords"></div>
-
+      <div id="output"></div>
     </div>
 
   </div>
@@ -245,13 +233,11 @@
 </section>
 
 <script src="script.js"></script>
-<script>
-    function selectClientUI(clientKey, el) {
 
-  // 👉 Update hidden select (THIS is what your logic uses)
+<script>
+function selectClientUI(clientKey, el) {
   document.getElementById("client").value = clientKey;
 
-  // 👉 UI active state
   document.querySelectorAll(".client-card").forEach(card => {
     card.classList.remove("active");
   });
