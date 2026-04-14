@@ -232,16 +232,5 @@
 
 <script src="script.js"></script>
 
-<script>
-function selectClientUI(clientKey, el) {
-  document.getElementById("client").value = clientKey;
-
-  document.querySelectorAll(".client-card").forEach(card => {
-    card.classList.remove("active");
-  });
-
-  el.classList.add("active");
-}
-</script>
 </body>
 </html>

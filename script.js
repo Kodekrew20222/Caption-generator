@@ -673,6 +673,17 @@ const clients = {
 
 let selectedClient = "monkeybar";
 
+function selectClientUI(clientKey, el) {
+
+  document.getElementById("client").value = clientKey;
+  selectedClient = clientKey;
+  document.querySelectorAll(".client-card").forEach(card => {
+    card.classList.remove("active");
+  });
+
+  el.classList.add("active");
+}
+document.getElementById("client").value
 
 /* ================================
    SAFE DOM LOAD
